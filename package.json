@@ -1,0 +1,20 @@
+{
+  "name": "microflac",
+  "version": "1.0.0",
+  "description": "A small, dependency-free FLAC encoder in plain JavaScript (no WebAssembly). Maximum compression by default.",
+  "main": "microflac.js",
+  "module": "microflac.mjs",
+  "exports": {
+    ".": {
+      "import": "./microflac.mjs",
+      "require": "./microflac.js"
+    }
+  },
+  "files": ["microflac.js", "microflac.mjs", "README.md", "LICENSE", "test.html"],
+  "keywords": ["flac", "encoder", "audio", "lossless", "javascript", "browser", "no-wasm"],
+  "license": "MIT",
+  "author": "Dialer's Apps",
+  "homepage": "https://dialersapps.pages.dev/lab/notes/microflac.html",
+  "repository": { "type": "git", "url": "git+https://github.com/dialersapps/microflac.git" },
+  "bugs": { "url": "https://github.com/dialersapps/microflac/issues" }
+}
