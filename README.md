@@ -15,6 +15,8 @@ slightly smaller than libFLAC's maximum preset.
 > [!NOTE]
 > Encoder only. It writes the required header block and frames - no tags, seek table or cover art. See [Known limits](#known-limits).
 
+**Try it live:** [run the test suite in your browser](https://dialersapps.github.io/microflac/test.html) (311 checks, nothing uploaded).
+
 **Contents:** [Why](#why) · [Quick start](#use) · [Features](#what-it-does) · [Numbers](#numbers-what-we-measured) · [How it works](#how-it-works) · [Tests](#tests) · [Limits](#known-limits) · [Licence](#licence)
 
 ## Why
