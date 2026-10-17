@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" role="img" aria-labelledby="mf3t mf3d"><style>text{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;fill:#e6ecf5}.dim{fill:#9fb4cc}.box{fill:#14202e;stroke:#3b5a7c;stroke-width:1.5}.box2{fill:#1a2c1f;stroke:#4f8a5e;stroke-width:1.5}.arrow{stroke:#7fa6cf;stroke-width:2;fill:none;marker-end:url(#mfarr)}.bar1{fill:#6c7f96}.bar2{fill:#4da3ff}.bar3{fill:#2f6fbd}</style><rect width="100%" height="100%" rx="10" fill="#0b0f14" stroke="#24364a"/>
+              <title id="mf3t">Time to encode 10 seconds of 44.1 kHz stereo</title>
+              <desc id="mf3d">libFLAC built as WebAssembly took about 0.13 seconds. microflac's fast setting took about 0.34 seconds and its default setting about 2.2 seconds.</desc>
+              <text class="dim" x="20" y="22" font-size="12">Time to encode 10 s of 44.1 kHz stereo (Chromium, one Windows PC). Shorter is faster.</text>
+              <g font-size="13">
+                <text x="20" y="66">libFLAC (WebAssembly)</text><rect class="bar1" x="220" y="48" width="29" height="26" rx="3"/><text x="258" y="67" font-weight="600">0.13 s</text>
+                <text x="20" y="116">microflac, "fast"</text><rect class="bar2" x="220" y="98" width="76" height="26" rx="3"/><text x="305" y="117" font-weight="600">0.34 s</text>
+                <text x="20" y="166">microflac, default</text><rect class="bar3" x="220" y="148" width="490" height="26" rx="3"/><text x="640" y="167" font-weight="600" fill="#fff">2.2 s</text>
+              </g>
+            </svg>

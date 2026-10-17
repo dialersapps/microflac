@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 210" role="img" aria-labelledby="mf2t mf2d"><style>text{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;fill:#e6ecf5}.dim{fill:#9fb4cc}.box{fill:#14202e;stroke:#3b5a7c;stroke-width:1.5}.box2{fill:#1a2c1f;stroke:#4f8a5e;stroke-width:1.5}.arrow{stroke:#7fa6cf;stroke-width:2;fill:none;marker-end:url(#mfarr)}.bar1{fill:#6c7f96}.bar2{fill:#4da3ff}.bar3{fill:#2f6fbd}</style><rect width="100%" height="100%" rx="10" fill="#0b0f14" stroke="#24364a"/>
+              <title id="mf2t">File size compared with libFLAC at its maximum preset</title>
+              <desc id="mf2d">libFLAC at its maximum preset is the baseline at 1.000. microflac's default setting is 0.982 of that size overall, with individual test files ranging from 0.904 to 0.999.</desc>
+              <text class="dim" x="20" y="22" font-size="12">File size relative to libFLAC maximum preset (1.000), smaller is better. Axis starts at 0.85.</text>
+              <line x1="60" y1="150" x2="680" y2="150" stroke="#3b5a7c"/>
+              <g font-size="11" text-anchor="middle"><text class="dim" x="60" y="170">0.85</text><text class="dim" x="215" y="170">0.90</text><text class="dim" x="370" y="170">0.95</text><text class="dim" x="525" y="170">1.00</text><text class="dim" x="680" y="170">1.05</text></g>
+              <g stroke="#3b5a7c"><line x1="215" y1="146" x2="215" y2="154"/><line x1="370" y1="146" x2="370" y2="154"/><line x1="525" y1="146" x2="525" y2="154"/><line x1="680" y1="146" x2="680" y2="154"/></g>
+              <line x1="525" y1="50" x2="525" y2="150" stroke="#6c7f96" stroke-dasharray="4 4"/>
+              <text class="dim" x="525" y="44" text-anchor="middle" font-size="11">libFLAC = 1.000</text>
+              <line x1="227" y1="100" x2="522" y2="100" stroke="#4da3ff" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="469" cy="100" r="9" fill="#e6ecf5" stroke="#4da3ff" stroke-width="3"/>
+              <text x="227" y="128" text-anchor="middle" font-size="12">0.904 (best file)</text>
+              <text x="469" y="80" text-anchor="middle" font-size="12" font-weight="600">0.982 overall</text>
+              <text x="530" y="128" text-anchor="start" font-size="12">0.999 (worst file)</text>
+            </svg>

@@ -1,30 +1,55 @@
-# microflac.js
+<p align="center"><img src="docs/banner.svg" alt="microflac.js: a FLAC encoder in plain JavaScript" width="100%"></p>
 
-Blog post with diagrams, numbers and how it was tested: https://dialersapps.pages.dev/lab/notes/microflac.html  ·  Source: https://github.com/dialersapps/microflac
+<p align="center">
+  <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-4da3ff"></a>
+  <img alt="Zero dependencies" src="https://img.shields.io/badge/dependencies-0-4f8a5e">
+  <img alt="No WebAssembly" src="https://img.shields.io/badge/WebAssembly-none-6c7f96">
+  <img alt="About 8 KB gzipped" src="https://img.shields.io/badge/gzipped-~8%20KB-2f6fbd">
+  <a href="https://dialersapps.pages.dev/lab/notes/microflac.html"><img alt="Read the blog post" src="https://img.shields.io/badge/blog-field%20note-14202e"></a>
+</p>
 
-A small FLAC **encoder** in plain JavaScript. No WebAssembly, no dependencies, no DOM: it runs in a page, in a
-Web Worker, or in Node. MIT licensed.
+**microflac.js** is a small FLAC **encoder** written in plain JavaScript. No WebAssembly, no dependencies, no DOM:
+it runs in a page, in a Web Worker, or in Node. It squeezes hard by default, and in our tests it produced files
+slightly smaller than libFLAC's maximum preset.
 
-Browsers can decode FLAC but cannot encode it (WebCodecs has no FLAC encoder). The JavaScript FLAC encoders we
-could find (libflac.js, `@mediabunny/flac-encoder`, flac.wasm) are libFLAC compiled to WebAssembly or
-asm.js. We needed one for the export menu in our Android app BOiNK SFX Synth, wanted no `.wasm` file to ship,
-and wanted maximum compression by default - so we wrote our own and are releasing it.
+> [!NOTE]
+> Encoder only. It writes the required header block and frames - no tags, seek table or cover art. See [Known limits](#known-limits).
+
+**Contents:** [Why](#why) · [Quick start](#use) · [Features](#what-it-does) · [Numbers](#numbers-what-we-measured) · [How it works](#how-it-works) · [Tests](#tests) · [Limits](#known-limits) · [Licence](#licence)
+
+## Why
+
+Browsers can **decode** FLAC but cannot **encode** it - WebCodecs has no FLAC encoder. The JavaScript FLAC encoders
+we could find ([libflac.js](https://github.com/mmig/libflac.js), [@mediabunny/flac-encoder](https://mediabunny.dev/guide/extensions/flac-encoder),
+flac.wasm and similar) are libFLAC compiled to WebAssembly or asm.js, which means shipping a binary next to your page and loading it at run time.
+
+We needed FLAC export for [BOiNK SFX Synth](https://dialersapps.pages.dev/boink.html), wanted **one plain script with nothing to fetch**, and wanted
+maximum compression by default. So we wrote our own, and we are releasing it for anyone to use.
+
+| | microflac.js | libFLAC compiled to WebAssembly |
+|---|---|---|
+| Ships as | one .js file (about 8 KB gzipped) | a JS loader plus a .wasm binary |
+| Loading | plain script, ES module, equire() | fetch and instantiate the binary |
+| File size (our test clips) | 0.982 of libFLAC -8 overall | 1.000 (baseline) |
+| Speed, 10 s stereo | about 2.2 s default, 0.34 s "fast" | about 0.13 s |
+
+Speed is where WebAssembly wins; for short clips, or in a Worker, the difference does not matter much. See [Numbers](#numbers-what-we-measured).
 
 ## Use
 
-```html
+``html
 <script src="microflac.js"></script>
 <script>
   const flac = microflac.encode({ channels: [left, right], sampleRate: 44100, bitsPerSample: 16 });
   // flac is a Uint8Array: save it, upload it, or new Blob([flac], { type: "audio/flac" })
 </script>
-```
+``
 
 ES module (`microflac.mjs`, same code):
 
-```js
+``js
 import microflac from "./microflac.mjs";          // or: import { encode } from "./microflac.mjs";
-```
+``
 
 Node / CommonJS: `const microflac = require("./microflac.js");`
 
@@ -60,9 +85,23 @@ six windows (tukey(0.5), partial_tukey(2), punchout_tukey(3)), Levinson-Durbin a
 wasted-bits detection; an exact Rice partition search (partition order 0-8, both residual coding methods,
 escape codes). `level: "fast"` uses one window, LPC order up to 8 and no precision search.
 
+## How it works
+
+Every choice is made by actually encoding the options and keeping the smallest result.
+
+<p align="center"><img src="docs/pipeline.svg" alt="microflac encoder pipeline: PCM samples, 4096-sample blocks, stereo mode choice, per-channel predictor choice, entropy coding, frame with CRCs, stream header with MD5" width="100%"></p>
+
+The structure it writes - every frame can be checked on its own, and the MD5 in the header lets any decoder confirm it got exactly the original audio back:
+
+<p align="center"><img src="docs/file-layout.svg" alt="Layout of a FLAC file: fLaC marker, STREAMINFO block, then frames; each frame has a header with CRC-8, one subframe per channel, and a CRC-16 footer" width="100%"></p>
+
 ## Numbers (what we measured)
 
 Measured in Chromium on one Windows PC; your numbers will differ.
+
+<p align="center"><img src="docs/size-vs-libflac.svg" alt="File size relative to libFLAC maximum preset: 0.982 overall, best file 0.904, worst file 0.999" width="100%"></p>
+
+<p align="center"><img src="docs/speed.svg" alt="Time to encode 10 seconds of 44.1 kHz stereo: libFLAC WebAssembly 0.13 s, microflac fast 0.34 s, microflac default 2.2 s" width="100%"></p>
 
 - **Size of the code**: `microflac.js` is 29.8 KB with the licence header and comments, about 24 KB with comments
   and whitespace stripped (a crude strip, not a real minifier), and 9.9 KB gzipped as shipped (8.0 KB stripped and gzipped).
@@ -105,4 +144,7 @@ families listed above and a precision that depends on block size are conventiona
 
 ## Licence
 
-MIT, see `LICENSE`. Copyright (c) 2026 Dialer's Apps.
+MIT, see [`LICENSE`](LICENSE). Copyright (c) 2026 Dialer's Apps.
+
+Made by [Dialer's Apps](https://dialersapps.pages.dev/). Read the story behind it in the
+[blog post](https://dialersapps.pages.dev/lab/notes/microflac.html).

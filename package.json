@@ -10,7 +10,7 @@
       "require": "./microflac.js"
     }
   },
-  "files": ["microflac.js", "microflac.mjs", "README.md", "LICENSE", "test.html"],
+  "files": ["microflac.js", "microflac.mjs", "README.md", "LICENSE", "test.html", "docs"],
   "keywords": ["flac", "encoder", "audio", "lossless", "javascript", "browser", "no-wasm"],
   "license": "MIT",
   "author": "Dialer's Apps",
