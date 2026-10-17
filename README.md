@@ -1,5 +1,7 @@
 # microflac.js
 
+Blog post with diagrams, numbers and how it was tested: https://dialersapps.pages.dev/lab/notes/microflac.html  ·  Source: https://github.com/dialersapps/microflac
+
 A small FLAC **encoder** in plain JavaScript. No WebAssembly, no dependencies, no DOM: it runs in a page, in a
 Web Worker, or in Node. MIT licensed.
 
